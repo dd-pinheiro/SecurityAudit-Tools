@@ -5,4 +5,4 @@ Esse repositório contém alguns projetos feitos por mim utilizando a linguagem 
 Contém scripts relacionados à varredura de hosts e portas, também como um identificador de serviços e suas versões.
 
 #### Auditoria
-Contém arquivos para realizar auditoria automatizada em sistemas e verificação de senha forte.
+Contém arquivos para realizar auditoria automatizada em sistemas e verificação de padrões fortes de senha.
