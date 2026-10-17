@@ -1,10 +1,8 @@
 # SecurityAudit-Tools
-Pequenos scripts em Python úteis para a área de Segurança defensiva. Abaixo, uma breve descrição da função de cada um:
+Esse repositório contém alguns projetos feitos por mim utilizando a linguagem Python. A maioria dos códigos neste repositório é direcionado para a área de Segurança Defensiva (Blue Team). 
 
-**Redes**
-
+#### Redes
 Contém scripts relacionados à varredura de hosts e portas, também como um identificador de serviços e suas versões.
 
-**Auditoria**
-
+#### Auditoria
 Contém arquivos para realizar auditoria automatizada em sistemas e verificação de senha forte.
