@@ -12,3 +12,5 @@ O script deve ser executado com permissões administrativas. Além disso, é nec
 - Scapy
 - pandas
 - openpyxl
+
+O arquivo **IPs_confiaveis_DEMO.xlsx** é uma demonstração de como deve ser fornecido a entrada do arquivo de IPs confiáveis.
