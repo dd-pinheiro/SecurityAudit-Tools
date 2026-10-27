@@ -10,15 +10,22 @@ import sys
 # Caso esteja utilizando a IDE Visual Studio, import os módulos do scapy da seguinte forma:
 #from scapy.all import ARP, ETHER, srp
 
-#Qual é o nome e a extensão(xlsx, xlsm, xls) do arquivo que contêm os dispositivos confiáveis?
+#Cores
+lista_cores = ['\033[91m', #Vermelho
+'\033[92m', #Verde
+'\033[93m', #Amarelo
+'\033[1m', #Negrito
+'\033[0m',] #Finaliza a cor
 
-escolha = input(""" Selecione uma opção:
-[0] - Selecionar um arquivo em formato xlsx para realizar a Leitura dos hosts confiáveis. O arquivo deve conter duas colunas nomeadas de IP e MAC
-[1] - Encerra o programa.
+escolha = input(f""" Selecione uma opção:
+{lista_cores[3]}[0]{lista_cores[4]} - Selecionar um arquivo em formato xlsx para realizar a Leitura dos hosts confiáveis. O arquivo deve conter duas colunas nomeadas de IP e MAC
+{lista_cores[3]}[1]{lista_cores[4]} - Encerra o programa.
 > """)[0] #Define a escolha do usuário.
+print(f'\n' * 2)
 
 if escolha in "0":
-    planilha = input('Nome do arquivo+extensão: ')
+    planilha = input(f'{lista_cores[3]}Qual é o nome+extensão(xlsx, xlsm, xls) do arquivo que contêm os dispositivos confiáveis?: {lista_cores[4]}')
+    print(f'\n' * 2)
     df = pd.read_excel(planilha)  # Define a planilha
     trusted_devices = dict(zip(df["IP"], df["MAC"])) #Cria o dicionário mapeando a coluna de IP para a coluna de MAC
     #O formato ficará da forma:
@@ -28,10 +35,9 @@ if escolha in "1":
     print('Parando o programa...')
     sys.exit()
 
-#trusted_devices = {"192.168.3.1": "Router","192.168.3.114": "Meu PC"}
 
-input_rede = input('Defina a rede que deseja realizar o scan:\n'
-                       '(Ex: 192.168.0.1/24)\n> ')
+input_rede = input(f'{lista_cores[3]}Defina a rede que deseja realizar o scan:\n(Ex: 192.168.0.1/24)\n> {lista_cores[4]}')
+print(f'\n' * 2)
 
 
 def scan(rede):
@@ -74,28 +80,25 @@ def relatorio(resultados_dispositivos):
     #Abre o arquivo em formato json para salvar os dados estruturados.
     with open(arquivo, 'w') as f:
         json.dump(resultados_dispositivos, f, indent=4) #Escreve um objeto Python em um arquivo com o formato json.
-        print(f'[+] Relatório salvo em {arquivo}')
+        print(f'{lista_cores[1]}[+] Relatório salvo em {arquivo}{lista_cores[4]}')
 
 
 def main():
     #Execução do código
     found_devices = scan(input_rede) #Define a rede que será escaneada
 
-    print('Escaneando rede local...')
+    print(f'{lista_cores[3]}Escaneando rede local...\n{lista_cores[4]}')
     sleep(2)
 
-    print('Verificando dispositivos desconhecidos na rede...\n')
-    sleep(2)
     new_devices = detect_notrust(found_devices)
 
-
     if new_devices:
-        print("[!] Dispositivos não reconhecidos foram encontrados na rede:")
+        print(f"{lista_cores[3]}[!] Dispositivos não reconhecidos foram encontrados na rede:{lista_cores[4]}")
         for devs in new_devices:
-            print(f"\t* {devs['IP']} - {devs['MAC']}")
+            print(f"{lista_cores[0]}\t* {devs['IP']} - {devs['MAC']}{lista_cores[4]}")
         relatorio(new_devices)
     else:
-        print("[+] Nenhum dispositivo desconhecido encontrado.")
+        print(f"{lista_cores[1]}[+] Nenhum dispositivo desconhecido encontrado.{lista_cores[4]}")
 
 
 if __name__ == "__main__":
